@@ -1,17 +1,21 @@
+<div type="button" class="in2code-feedback-button">FEEDBACK</div>
 <div class="in2code-feedback-form">
 	<f:for each="{feedback}" as="feedbackItem">
-		<dl>
-			<dt>Datum</dt>
-			<dd>{feedbackItem.crdate->f:format.date(format:'d.m.Y H:i')}</dd>
-			<f:if condition="{feedbackItem.user}">
-				<dt>Benutzer</dt>
-				<dd>{feedbackItem.user.uid}</dd>
-			</f:if>
-			<dt>URL</dt>
-			<dd>{feedbackItem.url}</dd>
-			<dt>Kommentar</dt>
-			<dd>{feedbackItem.comment}</dd>
-		</dl>
+		<div>
+			<div class="in2code-feedback-form--small">
+				<strong>{feedbackItem.user.username}</strong>
+				({feedbackItem.user.email}) - {feedbackItem.crdate->f:format.date(format:'d.m.Y H:i')}
+			</div>
+			<div class="in2code-feedback-form--small">
+				<strong>Gruppe(n):</strong>
+				<f:for each="{feedbackItem.user.usergroup}" as="usergroup" iteration="i">
+					<f:if condition="!{i.isFirst}">, </f:if>{usergroup.title}
+				</f:for>
+			</div>
+			<div class="in2code-feedback-form--small"><a href="{feedbackItem.url}">{feedbackItem.url}</a></div>
+			<div>{feedbackItem.comment}</div>
+		</div>
+		<hr />
 	</f:for>
 	<f:form action="save" object="{feedback}" objectName="feedback">
 		<fieldset>
@@ -34,7 +38,23 @@
 			</div>
 			<div>
 				<f:form.submit value="Senden" />
+				<button type="button" class="in2code-feedback-abort-button">Abbrechen</button>
 			</div>
 		</fieldset>
 	</f:form>
 </div>
+
+<script>
+(function() {
+	var overlay = document.querySelector('.in2code-feedback-form');
+	var feedbackButton = document.querySelector('.in2code-feedback-button');
+	var abortButton = document.querySelector('.in2code-feedback-abort-button');
+
+	feedbackButton.addEventListener('click', function() {
+		overlay.classList.add(['active']);
+	});
+	abortButton.addEventListener('click', function() {
+		overlay.classList.remove(['active']);
+	});
+})();
+</script>
