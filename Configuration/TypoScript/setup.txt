@@ -1,0 +1,25 @@
+plugin.tx_feedback {
+	settings {
+	}
+	persistence {
+	}
+	view {
+	}
+}
+
+lib.feedbackForm = USER
+lib.feedbackForm {
+	userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+	vendorName = In2code
+	extensionName = Feedback
+	pluginName = Main
+	controller = Feedback
+	action = index
+	view < plugin.tx_feedback.view
+	persistence < plugin.tx_feedback.persistence
+	settings < plugin.tx_feedback.settings
+}
+
+page.includeCSS {
+	feedback = EXT:feedback/Resources/Public/Css/feedback.css
+}

@@ -1,0 +1,18 @@
+.in2code-feedback-form {
+	border: 1px solid black;
+	background-color: #fff;
+	display: block;
+	position: fixed;
+	right: 0;
+	width: 50%;
+	padding: 20px;
+}
+
+.in2code-feedback-form dl {
+	background: #efefef;
+}
+
+.in2code-feedback-form textarea {
+	width: 100%;
+	height:50px;
+}

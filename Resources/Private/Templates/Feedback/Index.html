@@ -1,0 +1,40 @@
+<div class="in2code-feedback-form">
+	<f:for each="{feedback}" as="feedbackItem">
+		<dl>
+			<dt>Datum</dt>
+			<dd>{feedbackItem.crdate->f:format.date(format:'d.m.Y H:i')}</dd>
+			<f:if condition="{feedbackItem.user}">
+				<dt>Benutzer</dt>
+				<dd>{feedbackItem.user.uid}</dd>
+			</f:if>
+			<dt>URL</dt>
+			<dd>{feedbackItem.url}</dd>
+			<dt>Kommentar</dt>
+			<dd>{feedbackItem.comment}</dd>
+		</dl>
+	</f:for>
+	<f:form action="save" object="{feedback}" objectName="feedback">
+		<fieldset>
+			<legend>Feedback</legend>
+			<f:form.validationResults for="feedback">
+				<f:if condition="{validationResults.flattenedErrors}">
+					<ul>
+						<f:for each="{validationResults.flattenedErrors}" key="propertyPath" as="errors">
+							<f:for each="{errors}" as="error">
+								<li>{error.message} ({propertyPath})</li>
+							</f:for>
+						</f:for>
+					</ul>
+				</f:if>
+			</f:form.validationResults>
+			<f:form.hidden property="url" value="{url}" />
+			<f:form.hidden property="pid" value="{currentPid}" />
+			<div>
+				<f:form.textarea property="comment" />
+			</div>
+			<div>
+				<f:form.submit value="Senden" />
+			</div>
+		</fieldset>
+	</f:form>
+</div>
