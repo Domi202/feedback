@@ -1,10 +1,18 @@
 <?php
 namespace In2code\Feedback\Domain\Repository;
 
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 class FeedbackRepository extends Repository
 {
+    /**
+     * @var array
+     */
+    protected $defaultOrderings = [
+        'crdate' => QueryInterface::ORDER_DESCENDING
+    ];
+
     /**
      * @return void
      */
