@@ -3,16 +3,21 @@
 	<f:for each="{feedback}" as="feedbackItem">
 		<div>
 			<div class="in2code-feedback-form--small">
-				<strong>{feedbackItem.user.username}</strong>
-				({feedbackItem.user.email}) - {feedbackItem.crdate->f:format.date(format:'d.m.Y H:i')}
+				{feedbackItem.crdate->f:format.date(format:'d.m.Y H:i')} -
+				<f:if condition="{feedbackItem.user}">
+					<strong>{feedbackItem.user.username}</strong>
+					({feedbackItem.user.email}) -
+				</f:if>
+				<a href="{feedbackItem.url}">URL</a>
 			</div>
-			<div class="in2code-feedback-form--small">
-				<strong>Gruppe(n):</strong>
-				<f:for each="{feedbackItem.user.usergroup}" as="usergroup" iteration="i">
-					<f:if condition="!{i.isFirst}">, </f:if>{usergroup.title}
-				</f:for>
-			</div>
-			<div class="in2code-feedback-form--small"><a href="{feedbackItem.url}">{feedbackItem.url}</a></div>
+			<f:if condition="{feedbackItem.user.usergroup}">
+				<div class="in2code-feedback-form--small">
+					<strong>Gruppe(n):</strong>
+					<f:for each="{feedbackItem.user.usergroup}" as="usergroup" iteration="i">
+						<f:if condition="!{i.isFirst}">, </f:if>{usergroup.title}
+					</f:for>
+				</div>
+			</f:if>
 			<div>{feedbackItem.comment->f:format.html()}</div>
 		</div>
 		<hr />
