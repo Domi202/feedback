@@ -15,6 +15,7 @@ CREATE TABLE tx_feedback_domain_model_feedback (
 
 	url tinytext,
 	comment text,
+	data text,
 
   PRIMARY KEY (uid),
   KEY parent (pid)

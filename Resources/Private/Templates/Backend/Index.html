@@ -1,0 +1,28 @@
+<h1>Feedback ({feedback->f:count()})</h1>
+
+<f:if condition="{feedback}">
+	<f:for each="{feedback}" as="feedbackItem">
+		<div>
+			<div class="in2code-feedback-form--small">
+				{feedbackItem.crdate->f:format.date(format:'d.m.Y H:i')} -
+				<f:if condition="{feedbackItem.user}">
+					<strong>{feedbackItem.user.username}</strong>
+					({feedbackItem.user.email}) -
+				</f:if>
+				<a href="{feedbackItem.url}">URL</a>
+			</div>
+			<f:if condition="{feedbackItem.user.usergroup}">
+				<div>
+					<strong>Gruppe(n):</strong>
+					<f:for each="{feedbackItem.user.usergroup}" as="usergroup" iteration="i">
+						<f:if condition="!{i.isFirst}">, </f:if>{usergroup.title}
+					</f:for>
+				</div>
+			</f:if>
+			<div>{feedbackItem.comment->f:format.html()}</div>
+			<f:debug inline="true">{feedbackItem.unserializedData}</f:debug>
+		</div>
+	</f:for>
+</f:if>
+
+

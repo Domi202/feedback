@@ -33,6 +33,11 @@ class FeedbackController extends ActionController
             'feedback' => $this->feedbackService->getFeedbackForPageUid($currentPid),
             'url' => $url,
             'currentPid' => $currentPid,
+            'data' => serialize([
+                '_POST' => GeneralUtility::_POST(),
+                '_GET' => GeneralUtility::_GET(),
+                'env' => GeneralUtility::getIndpEnv('_ARRAY'),
+            ]),
         ]);
     }
 

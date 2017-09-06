@@ -55,6 +55,11 @@ return [
                 'eval' => 'trim',
             ],
         ],
+        'data' => [
+            'config' => [
+                'type' => 'passthrough',
+            ],
+        ],
         'user' => [
             'label' => $languageFilePrefix . Feedback::TABLE_NAME . '.user',
             'config' => [

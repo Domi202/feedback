@@ -36,6 +36,7 @@
 					</ul>
 				</f:if>
 			</f:form.validationResults>
+			<f:form.hidden property="data" value="{data}" />
 			<f:form.hidden property="url" value="{url}" />
 			<f:form.hidden property="pid" value="{currentPid}" />
 			<div>
@@ -56,10 +57,10 @@
 	var abortButton = document.querySelector('.in2code-feedback-abort-button');
 
 	feedbackButton.addEventListener('click', function() {
-		overlay.classList.add(['active']);
+		overlay.classList.add('active');
 	});
 	abortButton.addEventListener('click', function() {
-		overlay.classList.remove(['active']);
+		overlay.classList.remove('active');
 	});
 })();
 </script>

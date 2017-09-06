@@ -35,6 +35,11 @@ class Feedback extends AbstractEntity
     protected $comment = '';
 
     /**
+     * @var string
+     */
+    protected $data = '';
+
+    /**
      * @var \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
      * @lazy
      */
@@ -120,6 +125,31 @@ class Feedback extends AbstractEntity
     public function setComment($comment)
     {
         $this->comment = $comment;
+    }
+
+    /**
+     * @return string
+     */
+    public function getData(): string
+    {
+        return unserialize($this->data);
+    }
+
+    /**
+     * @param string $data
+     * @return void
+     */
+    public function setData(string $data)
+    {
+        $this->data = $data;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUnserializedData()
+    {
+        return unserialize($this->data);
     }
 
     /**

@@ -71,4 +71,13 @@ class FeedbackService implements SingletonInterface
         }
         return null;
     }
+
+    /**
+     * @param int $pageUid
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     */
+    public function getFeedbackForPage(int $pageUid)
+    {
+        return $this->feedbackRepository->findByPid([$pageUid]);
+    }
 }
