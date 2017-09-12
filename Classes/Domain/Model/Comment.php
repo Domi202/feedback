@@ -1,21 +1,14 @@
 <?php
 namespace In2code\Feedback\Domain\Model;
 
-
 use TYPO3\CMS\Extbase\Domain\Model\BackendUser;
 use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
-use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
-class Feedback extends AbstractEntity
+class Comment extends AbstractEntity
 {
-    const TABLE_NAME = 'tx_feedback_domain_model_feedback';
-
-    /**
-     * @var string
-     */
-    protected $type = self::class;
+    const TABLE_NAME = 'tx_feedback_domain_model_comment';
 
     /**
      * @var \DateTime
@@ -28,24 +21,15 @@ class Feedback extends AbstractEntity
     protected $tstamp;
 
     /**
-     * @var string
+     * @var \In2code\Feedback\Domain\Model\Feedback
+     * @lazy
      */
-    protected $url = '';
+    protected $feedback = null;
 
     /**
      * @var string
      */
     protected $comment = '';
-
-    /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\In2code\Feedback\Domain\Model\Comment>
-     */
-    protected $answers = null;
-
-    /**
-     * @var string
-     */
-    protected $data = '';
 
     /**
      * @var \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
@@ -60,22 +44,21 @@ class Feedback extends AbstractEntity
     protected $beUser = null;
 
     /**
-     * @param string $url
      * @param string $comment
-     * @param FrontendUser|null $feUser
-     * @param BackendUser|null $beUser
+     * @param Feedback $feedback
+     * @param FrontendUser $feUser
+     * @param BackendUser $beUser
      */
     public function __construct(
-        $url = '',
         $comment = '',
+        Feedback $feedback = null,
         FrontendUser $feUser = null,
         BackendUser $beUser = null
     ) {
-        $this->url = $url;
         $this->comment = $comment;
+        $this->feedback = $feedback;
         $this->feUser = $feUser;
         $this->beUser = $beUser;
-        $this->answers = new ObjectStorage();
     }
 
     /**
@@ -95,37 +78,20 @@ class Feedback extends AbstractEntity
     }
 
     /**
-     * @return string
+     * @return Feedback
      */
-    public function getType()
+    public function getFeedback(): Feedback
     {
-        return $this->type;
+        return $this->feedback;
     }
 
     /**
-     * @param string $type
+     * @param Feedback $feedback
      * @return void
      */
-    public function setType($type)
+    public function setFeedback(Feedback $feedback)
     {
-        $this->type = $type;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrl()
-    {
-        return $this->url;
-    }
-
-    /**
-     * @param string $url
-     * @return void
-     */
-    public function setUrl($url)
-    {
-        $this->url = $url;
+        $this->feedback = $feedback;
     }
 
     /**
@@ -143,62 +109,6 @@ class Feedback extends AbstractEntity
     public function setComment($comment)
     {
         $this->comment = $comment;
-    }
-
-    /**
-     * @return ObjectStorage
-     */
-    public function getAnswers(): ObjectStorage
-    {
-        return $this->answers;
-    }
-
-    /**
-     * @param ObjectStorage $answers
-     * @return void
-     */
-    public function setAnswers(ObjectStorage $answers)
-    {
-        foreach ($answers as $answer) {
-            /** @var Comment $answer */
-            $answer->setFeedback($this);
-        }
-        $this->answers = $answers;
-    }
-
-    /**
-     * @param Comment $comment
-     * @return void
-     */
-    public function addAnswer(Comment $comment)
-    {
-        $comment->setFeedback($this);
-        $this->answers->attach($comment);
-    }
-
-    /**
-     * @return string
-     */
-    public function getData(): string
-    {
-        return unserialize($this->data);
-    }
-
-    /**
-     * @param string $data
-     * @return void
-     */
-    public function setData(string $data)
-    {
-        $this->data = $data;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getUnserializedData()
-    {
-        return unserialize($this->data);
     }
 
     /**

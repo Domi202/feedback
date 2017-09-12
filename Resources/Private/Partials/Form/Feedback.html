@@ -1,0 +1,26 @@
+<f:form action="save" object="{feedback}" objectName="feedback">
+	<fieldset>
+		<legend>Feedback</legend>
+		<f:form.validationResults for="feedback">
+			<f:if condition="{validationResults.flattenedErrors}">
+				<ul>
+					<f:for each="{validationResults.flattenedErrors}" key="propertyPath" as="errors">
+						<f:for each="{errors}" as="error">
+							<li>{error.message} ({propertyPath})</li>
+						</f:for>
+					</f:for>
+				</ul>
+			</f:if>
+		</f:form.validationResults>
+		<f:form.hidden property="data" value="{data}" />
+		<f:form.hidden property="url" value="{url}" />
+		<f:form.hidden property="pid" value="{currentPid}" />
+		<div>
+			<f:form.textarea property="comment" data="{'no-rte':'true'}" />
+		</div>
+		<div>
+			<f:form.submit value="Senden" />
+			<button type="button" class="in2code-feedback-abort-button">Abbrechen</button>
+		</div>
+	</fieldset>
+</f:form>

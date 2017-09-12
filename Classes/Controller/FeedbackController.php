@@ -1,6 +1,7 @@
 <?php
 namespace In2code\Feedback\Controller;
 
+use In2code\Feedback\Domain\Model\Comment;
 use In2code\Feedback\Domain\Model\Feedback;
 use In2code\Feedback\Domain\Service\FeedbackService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -50,6 +51,28 @@ class FeedbackController extends ActionController
     public function saveAction(Feedback $feedback)
     {
         $this->feedbackService->add($feedback);
+        $this->redirect('index');
+    }
+
+    /**
+     * @param Comment $comment
+     * @return void
+     *
+     * @validate $comment In2code.Feedback:Comment
+     */
+    public function answerAction(Comment $comment)
+    {
+        if ($feUser = $this->feedbackService->getCurrentFrontendUser()) {
+            $comment->setFeUser($feUser);
+        }
+        if ($beUser = $this->feedbackService->getCurrentBackendUser()) {
+            $comment->setBeUser($beUser);
+        }
+
+        $feedback = $comment->getFeedback();
+        $feedback->addAnswer($comment);
+
+        $this->feedbackService->update($comment->getFeedback());
         $this->redirect('index');
     }
 }

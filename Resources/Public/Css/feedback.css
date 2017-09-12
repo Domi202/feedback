@@ -44,6 +44,11 @@
   font-size: .8em;
 }
 
+.in2code-feedback-answer {
+  padding-left: 20px;
+  border-left:10px solid #efefef;
+}
+
 .in2code-feedback-form input[type="submit"] {
   margin:0;
 }

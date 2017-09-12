@@ -5,9 +5,9 @@ TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
     'In2code.Feedback',
     'Main',
     [
-        'Feedback' => 'index,save',
+        'Feedback' => 'index,save,answer',
     ],
     [
-        'Feedback' => 'index,save',
+        'Feedback' => 'index,save,answer',
     ]
 );

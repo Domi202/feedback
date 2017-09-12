@@ -1,0 +1,28 @@
+<f:section name="Username">
+	<f:if condition="{object.feUser}">
+		<f:then>
+			<strong>FE: {object.feUser.username}</strong>
+			({object.feUser.email})
+		</f:then>
+		<f:else>
+			<f:if condition="{object.beUser}">
+				<f:then>
+					<strong>BE: {object.beUser.username}</strong>
+					({object.beUser.email})
+				</f:then>
+				<f:else>
+					<strong>Nicht eingeloggter Benutzer</strong>
+				</f:else>
+			</f:if>
+		</f:else>
+	</f:if>
+</f:section>
+
+<f:section name="Usergroups">
+	<div class="in2code-feedback-form--small">
+		<strong>Gruppe(n):</strong>
+		<f:for each="{object.feUser.usergroup}" as="usergroup" iteration="i">
+			<f:if condition="!{i.isFirst}">, </f:if>{usergroup.title}
+		</f:for>
+	</div>
+</f:section>

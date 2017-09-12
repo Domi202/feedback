@@ -1,13 +1,13 @@
 <?php
 namespace In2code\Feedback\Validation\Validator;
 
-use In2code\Feedback\Domain\Model\Feedback;
+use In2code\Feedback\Domain\Model\Comment;
 use TYPO3\CMS\Extbase\Validation\Validator\GenericObjectValidator;
 use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
 use TYPO3\CMS\Extbase\Validation\Validator\StringValidator;
 use TYPO3\CMS\Extbase\Validation\ValidatorResolver;
 
-class FeedbackValidator extends GenericObjectValidator
+class CommentValidator extends GenericObjectValidator
 {
     /**
      * @var ValidatorResolver
@@ -24,23 +24,14 @@ class FeedbackValidator extends GenericObjectValidator
     }
 
     /**
-     * @param Feedback $object
+     * @param Comment $object
      * @return void
      */
     protected function isValid($object)
     {
-        if (!($object instanceof Feedback)) {
-            throw new \RuntimeException('Object has to be of type ' . Feedback::class);
+        if (!($object instanceof Comment)) {
+            throw new \RuntimeException('Object has to be of type ' . Comment::class);
         }
-
-        $this->checkProperty(
-            $object->getUrl(),
-            [
-                $this->validatorResolver->createValidator(NotEmptyValidator::class),
-                $this->validatorResolver->createValidator(StringValidator::class)
-            ],
-            'url'
-        );
 
         $this->checkProperty(
             $object->getComment(),

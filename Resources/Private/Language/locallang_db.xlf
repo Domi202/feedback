@@ -15,10 +15,38 @@
 			<trans-unit id="tx_feedback_domain_model_feedback.comment">
 				<source>Kommentar</source>
 			</trans-unit>
-			<trans-unit id="tx_feedback_domain_model_feedback.user">
-				<source>Eingeloggter Benutzer</source>
+			<trans-unit id="tx_feedback_domain_model_feedback.answers">
+				<source>Antworten</source>
 			</trans-unit>
-			<trans-unit id="tx_feedback_domain_model_feedback.user.I.0">
+			<trans-unit id="tx_feedback_domain_model_feedback.fe_user">
+				<source>Eingeloggter Frontend-Benutzer</source>
+			</trans-unit>
+			<trans-unit id="tx_feedback_domain_model_feedback.fe_user.I.0">
+				<source>Nicht eingeloggt</source>
+			</trans-unit>
+			<trans-unit id="tx_feedback_domain_model_feedback.be_user">
+				<source>Eingeloggter Backend-Benutzer</source>
+			</trans-unit>
+			<trans-unit id="tx_feedback_domain_model_feedback.be_user.I.0">
+				<source>Nicht eingeloggt</source>
+			</trans-unit>
+
+			<trans-unit id="tx_feedback_domain_model_comment">
+				<source>Kommentar</source>
+			</trans-unit>
+			<trans-unit id="tx_feedback_domain_model_comment.comment">
+				<source>Kommentar</source>
+			</trans-unit>
+			<trans-unit id="tx_feedback_domain_model_comment.fe_user">
+				<source>Eingeloggter Frontend-Benutzer</source>
+			</trans-unit>
+			<trans-unit id="tx_feedback_domain_model_comment.fe_user.I.0">
+				<source>Nicht eingeloggt</source>
+			</trans-unit>
+			<trans-unit id="tx_feedback_domain_model_comment.be_user">
+				<source>Eingeloggter Backend-Benutzer</source>
+			</trans-unit>
+			<trans-unit id="tx_feedback_domain_model_comment.be_user.I.0">
 				<source>Nicht eingeloggt</source>
 			</trans-unit>
 		</body>

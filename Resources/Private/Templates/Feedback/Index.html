@@ -4,50 +4,25 @@
 		<div>
 			<div class="in2code-feedback-form--small">
 				{feedbackItem.crdate->f:format.date(format:'d.m.Y H:i')} -
-				<f:if condition="{feedbackItem.user}">
-					<strong>{feedbackItem.user.username}</strong>
-					({feedbackItem.user.email}) -
-				</f:if>
+				<f:render partial="User" section="Username" arguments="{object:feedbackItem}" /> -
 				<a href="{feedbackItem.url}">URL</a>
 			</div>
-			<f:if condition="{feedbackItem.user.usergroup}">
-				<div class="in2code-feedback-form--small">
-					<strong>Gruppe(n):</strong>
-					<f:for each="{feedbackItem.user.usergroup}" as="usergroup" iteration="i">
-						<f:if condition="!{i.isFirst}">, </f:if>{usergroup.title}
-					</f:for>
-				</div>
+			<f:if condition="{feedbackItem.feUser.usergroup}">
+				<f:render partial="User" section="Usergroups" arguments="{object:feedbackItem}" />
 			</f:if>
 			<div>{feedbackItem.comment->f:format.html()}</div>
+			<f:if condition="{feedbackItem.answers}">
+				<f:for each="{feedbackItem.answers}" as="answer">
+					<f:render partial="Answer" arguments="{answer:answer}" />
+				</f:for>
+			</f:if>
+			<div class="in2code-feedback-answer">
+				<f:render partial="Form/Answer" arguments="{_all}" />
+			</div>
 		</div>
 		<hr />
 	</f:for>
-	<f:form action="save" object="{feedback}" objectName="feedback">
-		<fieldset>
-			<legend>Feedback</legend>
-			<f:form.validationResults for="feedback">
-				<f:if condition="{validationResults.flattenedErrors}">
-					<ul>
-						<f:for each="{validationResults.flattenedErrors}" key="propertyPath" as="errors">
-							<f:for each="{errors}" as="error">
-								<li>{error.message} ({propertyPath})</li>
-							</f:for>
-						</f:for>
-					</ul>
-				</f:if>
-			</f:form.validationResults>
-			<f:form.hidden property="data" value="{data}" />
-			<f:form.hidden property="url" value="{url}" />
-			<f:form.hidden property="pid" value="{currentPid}" />
-			<div>
-				<f:form.textarea property="comment" />
-			</div>
-			<div>
-				<f:form.submit value="Senden" />
-				<button type="button" class="in2code-feedback-abort-button">Abbrechen</button>
-			</div>
-		</fieldset>
-	</f:form>
+	<f:render partial="Form/Feedback" arguments="{_all}" />
 </div>
 
 <script>

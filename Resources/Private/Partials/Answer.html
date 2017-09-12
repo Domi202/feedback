@@ -1,0 +1,7 @@
+<div class="in2code-feedback-answer">
+	<div class="in2code-feedback-form--small">
+		{answer.crdate->f:format.date(format:'d.m.Y H:i')} -
+		<f:render partial="User" section="Username" arguments="{object:answer}" />
+	</div>
+	<div>{answer.comment->f:format.html()}</div>
+</div>
