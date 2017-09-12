@@ -19,7 +19,7 @@ if (TYPO3_MODE === 'BE') {
         ],
         [
             'access' => 'user,group',
-            'icon' => 'EXT:feedback/Resources/Public/Icons/icon.svg',
+            'icon' => 'EXT:feedback/Resources/Public/Icons/Icon.svg',
             'labels' => 'LLL:EXT:feedback/Resources/Private/Language/locallang_mod.xlf',
         ]
     );
