@@ -58,7 +58,7 @@ class FeedbackController extends ActionController
      * @param Answer $answer
      * @return void
      *
-     * @validate $comment In2code.Feedback:Answer
+     * @validate $answer In2code.Feedback:Answer
      */
     public function answerAction(Answer $answer)
     {

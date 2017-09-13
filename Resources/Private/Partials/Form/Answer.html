@@ -1,5 +1,16 @@
-<f:form action="answer" objectName="comment">
+<f:form action="answer" objectName="answer">
 	<h4>Antworten</h4>
+	<f:form.validationResults for="answer">
+		<f:if condition="{validationResults.flattenedErrors}">
+			<ul>
+				<f:for each="{validationResults.flattenedErrors}" key="propertyPath" as="errors">
+					<f:for each="{errors}" as="error">
+						<li>{error.message} ({propertyPath})</li>
+					</f:for>
+				</f:for>
+			</ul>
+		</f:if>
+	</f:form.validationResults>
 	<f:form.hidden property="feedback" value="{feedbackItem}" />
 	<div><f:form.textarea property="comment" data="{'no-rte':'true'}" /></div>
 	<div><f:form.submit value="Antworten" /></div>
