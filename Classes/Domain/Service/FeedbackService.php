@@ -60,6 +60,11 @@ class FeedbackService implements SingletonInterface
      */
     public function getFeedbackForPageUid(int $pageUid)
     {
+        if ($pageUid === 0) {
+            $query = $this->feedbackRepository->findAll()->getQuery();
+            $query->getQuerySettings()->setRespectStoragePage(false);
+            return $query->execute();
+        }
         return $this->feedbackRepository->findByPid($pageUid);
     }
 

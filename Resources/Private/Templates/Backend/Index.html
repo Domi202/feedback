@@ -5,24 +5,19 @@
 		<div>
 			<div class="in2code-feedback-form--small">
 				{feedbackItem.crdate->f:format.date(format:'d.m.Y H:i')} -
-				<f:if condition="{feedbackItem.user}">
-					<strong>{feedbackItem.user.username}</strong>
-					({feedbackItem.user.email}) -
-				</f:if>
+				<f:render partial="User" section="Username" arguments="{object:feedbackItem}" /> -
 				<a href="{feedbackItem.url}">URL</a>
 			</div>
-			<f:if condition="{feedbackItem.user.usergroup}">
-				<div>
-					<strong>Gruppe(n):</strong>
-					<f:for each="{feedbackItem.user.usergroup}" as="usergroup" iteration="i">
-						<f:if condition="!{i.isFirst}">, </f:if>{usergroup.title}
-					</f:for>
-				</div>
+			<f:if condition="{feedbackItem.feUser.usergroup}">
+				<f:render partial="User" section="Usergroups" arguments="{object:feedbackItem}" />
 			</f:if>
 			<div>{feedbackItem.comment->f:format.html()}</div>
+			<f:if condition="{feedbackItem.answers}">
+				<f:for each="{feedbackItem.answers}" as="answer">
+					<f:render partial="Answer" arguments="{_all}" />
+				</f:for>
+			</f:if>
 			<f:debug inline="true">{feedbackItem.unserializedData}</f:debug>
 		</div>
 	</f:for>
 </f:if>
-
-

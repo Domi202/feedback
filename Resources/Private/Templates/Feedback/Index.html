@@ -3,6 +3,7 @@
 	<f:for each="{feedback}" as="feedbackItem">
 		<div>
 			<div class="in2code-feedback-form--small">
+				<f:if condition="{feedbackItem.type}"><strong>{feedbackItem.type.title}:</strong></f:if>
 				{feedbackItem.crdate->f:format.date(format:'d.m.Y H:i')} -
 				<f:render partial="User" section="Username" arguments="{object:feedbackItem}" /> -
 				<a href="{feedbackItem.url}">URL</a>

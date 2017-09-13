@@ -5,7 +5,7 @@ defined('TYPO3_MODE') or die('Access denied.');
     \In2code\Feedback\Domain\Model\Feedback::TABLE_NAME
 );
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages(
-    \In2code\Feedback\Domain\Model\Comment::TABLE_NAME
+    \In2code\Feedback\Domain\Model\Answer::TABLE_NAME
 );
 
 if (TYPO3_MODE === 'BE') {

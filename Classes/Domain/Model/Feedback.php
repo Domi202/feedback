@@ -13,9 +13,10 @@ class Feedback extends AbstractEntity
     const TABLE_NAME = 'tx_feedback_domain_model_feedback';
 
     /**
-     * @var string
+     * @var \In2code\Feedback\Domain\Model\FeedbackType
+     * @lazy
      */
-    protected $type = self::class;
+    protected $type = null;
 
     /**
      * @var \DateTime
@@ -38,7 +39,7 @@ class Feedback extends AbstractEntity
     protected $comment = '';
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\In2code\Feedback\Domain\Model\Comment>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\In2code\Feedback\Domain\Model\Answer>
      */
     protected $answers = null;
 
@@ -95,18 +96,21 @@ class Feedback extends AbstractEntity
     }
 
     /**
-     * @return string
+     * @return FeedbackType
      */
     public function getType()
     {
+        if ($this->type instanceof LazyLoadingProxy) {
+            $this->type->_loadRealInstance();
+        }
         return $this->type;
     }
 
     /**
-     * @param string $type
+     * @param FeedbackType $type
      * @return void
      */
-    public function setType($type)
+    public function setType(FeedbackType $type)
     {
         $this->type = $type;
     }
@@ -160,20 +164,20 @@ class Feedback extends AbstractEntity
     public function setAnswers(ObjectStorage $answers)
     {
         foreach ($answers as $answer) {
-            /** @var Comment $answer */
+            /** @var Answer $answer */
             $answer->setFeedback($this);
         }
         $this->answers = $answers;
     }
 
     /**
-     * @param Comment $comment
+     * @param Answer $answer
      * @return void
      */
-    public function addAnswer(Comment $comment)
+    public function addAnswer(Answer $answer)
     {
-        $comment->setFeedback($this);
-        $this->answers->attach($comment);
+        $answer->setFeedback($this);
+        $this->answers->attach($answer);
     }
 
     /**

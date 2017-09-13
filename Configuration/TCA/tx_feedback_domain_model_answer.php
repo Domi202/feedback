@@ -1,18 +1,19 @@
 <?php
 
-use In2code\Feedback\Domain\Model\Comment;
+use In2code\Feedback\Domain\Model\Answer;
 use In2code\Feedback\Domain\Model\Feedback;
 
 $languageFilePrefix = 'LLL:EXT:feedback/Resources/Private/Language/locallang_db.xlf:';
 
 return [
     'ctrl' => [
-        'title' => $languageFilePrefix . Comment::TABLE_NAME,
+        'title' => $languageFilePrefix . Answer::TABLE_NAME,
         'label' => 'comment',
-        // 'type' => 'type',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'delete' => 'deleted',
+        'hideTable' => true,
+        'iconfile' => 'EXT:feedback/Resources/Public/Icons/Answer.svg',
     ],
     'types' => [
         '0' => [
@@ -46,32 +47,32 @@ return [
             ],
         ],
         'comment' => [
-            'label' => $languageFilePrefix . Comment::TABLE_NAME . '.comment',
+            'label' => $languageFilePrefix . Answer::TABLE_NAME . '.comment',
             'config' => [
                 'type' => 'text',
                 'eval' => 'trim',
             ],
         ],
         'fe_user' => [
-            'label' => $languageFilePrefix . Comment::TABLE_NAME . '.fe_user',
+            'label' => $languageFilePrefix . Answer::TABLE_NAME . '.fe_user',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'fe_users',
                 'items' => [
-                    [$languageFilePrefix . Comment::TABLE_NAME . '.fe_user.I.0', 0]
+                    [$languageFilePrefix . Answer::TABLE_NAME . '.fe_user.I.0', 0]
                 ],
                 'default' => 0,
             ],
         ],
         'be_user' => [
-            'label' => $languageFilePrefix . Comment::TABLE_NAME . '.be_user',
+            'label' => $languageFilePrefix . Answer::TABLE_NAME . '.be_user',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'be_users',
                 'items' => [
-                    [$languageFilePrefix . Comment::TABLE_NAME . '.be_user.I.0', 0]
+                    [$languageFilePrefix . Answer::TABLE_NAME . '.be_user.I.0', 0]
                 ],
                 'default' => 0,
             ],

@@ -1,3 +1,4 @@
+{namespace feedback=In2code\Feedback\ViewHelpers}
 <f:form action="save" object="{feedback}" objectName="feedback">
 	<fieldset>
 		<legend>Feedback</legend>
@@ -15,6 +16,9 @@
 		<f:form.hidden property="data" value="{data}" />
 		<f:form.hidden property="url" value="{url}" />
 		<f:form.hidden property="pid" value="{currentPid}" />
+		<div>
+			<feedback:form.typeSelect property="type" />
+		</div>
 		<div>
 			<f:form.textarea property="comment" data="{'no-rte':'true'}" />
 		</div>

@@ -6,9 +6,9 @@ use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 
-class Comment extends AbstractEntity
+class Answer extends AbstractEntity
 {
-    const TABLE_NAME = 'tx_feedback_domain_model_comment';
+    const TABLE_NAME = 'tx_feedback_domain_model_answer';
 
     /**
      * @var \DateTime

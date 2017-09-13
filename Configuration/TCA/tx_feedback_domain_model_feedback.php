@@ -1,7 +1,8 @@
 <?php
 
-use In2code\Feedback\Domain\Model\Comment;
+use In2code\Feedback\Domain\Model\Answer;
 use In2code\Feedback\Domain\Model\Feedback;
+use In2code\Feedback\Domain\Model\FeedbackType;
 
 $languageFilePrefix = 'LLL:EXT:feedback/Resources/Private/Language/locallang_db.xlf:';
 
@@ -9,10 +10,10 @@ return [
     'ctrl' => [
         'title' => $languageFilePrefix . Feedback::TABLE_NAME,
         'label' => 'comment',
-        // 'type' => 'type',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'delete' => 'deleted',
+        'iconfile' => 'EXT:feedback/Resources/Public/Icons/Feedback.svg',
     ],
     'types' => [
         '0' => [
@@ -42,7 +43,7 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'items' => [],
+                'foreign_table' => FeedbackType::TABLE_NAME,
             ],
         ],
         'url' => [
@@ -63,7 +64,7 @@ return [
             'label' => $languageFilePrefix . Feedback::TABLE_NAME . '.answers',
             'config' => [
                 'type' => 'inline',
-                'foreign_table' => Comment::TABLE_NAME,
+                'foreign_table' => Answer::TABLE_NAME,
                 'foreign_field' => 'feedback',
                 'minitems' => 0,
                 'maxitems' => 9999,
