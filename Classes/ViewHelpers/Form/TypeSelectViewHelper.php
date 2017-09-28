@@ -50,6 +50,15 @@ class TypeSelectViewHelper extends SelectViewHelper
     /**
      * @return void
      */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->overrideArgument('prependOptionLabel', 'string', 'If specified, will provide an option at first position with the specified label.', false, 'Bitte wählen');
+    }
+
+    /**
+     * @return void
+     */
     public function initialize()
     {
         parent::initialize();

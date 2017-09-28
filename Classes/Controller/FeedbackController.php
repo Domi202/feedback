@@ -3,6 +3,7 @@ namespace In2code\Feedback\Controller;
 
 use In2code\Feedback\Domain\Model\Answer;
 use In2code\Feedback\Domain\Model\Feedback;
+use In2code\Feedback\Domain\Repository\FeedbackTypeRepository;
 use In2code\Feedback\Domain\Service\FeedbackService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -15,6 +16,11 @@ class FeedbackController extends ActionController
     protected $feedbackService;
 
     /**
+     * @var FeedbackTypeRepository
+     */
+    protected $feedbackTypeRepository;
+
+    /**
      * @param FeedbackService $feedbackService
      * @return void
      */
@@ -24,16 +30,29 @@ class FeedbackController extends ActionController
     }
 
     /**
+     * @param FeedbackTypeRepository $feedbackTypeRepository
+     * @return void
+     */
+    public function injectFeedbackTypeRepository(FeedbackTypeRepository $feedbackTypeRepository)
+    {
+        $this->feedbackTypeRepository = $feedbackTypeRepository;
+    }
+
+    /**
      * @return void
      */
     public function indexAction()
     {
         $currentPid = $GLOBALS['TSFE']->id;
         $url = GeneralUtility::getIndpEnv('TYPO3_REQUEST_URL');
+        $feedback = $this->feedbackService->getFeedbackForPageUid($currentPid);
         $this->view->assignMultiple([
-            'feedback' => $this->feedbackService->getFeedbackForPageUid($currentPid),
+            'feedback' => $feedback,
+            'feedbackTypeCount' => $this->feedbackService->getTypeCount($feedback),
+            'feedbackTypes' => $this->feedbackTypeRepository->findAll(),
             'url' => $url,
             'currentPid' => $currentPid,
+            'hasValidationErrors' => $this->request->getOriginalRequestMappingResults()->hasErrors(),
             'data' => serialize([
                 '_POST' => GeneralUtility::_POST(),
                 '_GET' => GeneralUtility::_GET(),

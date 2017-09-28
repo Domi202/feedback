@@ -1,7 +1,10 @@
 <div type="button" class="in2code-feedback-button">FEEDBACK ({feedback->f:count()})</div>
-<div class="in2code-feedback-form">
+<div class="in2code-feedback-form{f:if(condition:hasValidationErrors, then:' active')}">
+	<f:for each="{feedbackTypeCount}" key="typeUid" as="feedbackType">
+		<a href="javascript:void(0);" data-select-type="{typeUid}">{feedbackType.title} ({feedbackType.count})</a>
+	</f:for>
 	<f:for each="{feedback}" as="feedbackItem">
-		<div>
+		<div data-type="{feedbackItem.type.uid}" style="display:none;">
 			<div class="in2code-feedback-form--small">
 				<f:if condition="{feedbackItem.type}"><strong>{feedbackItem.type.title}:</strong></f:if>
 				{feedbackItem.crdate->f:format.date(format:'d.m.Y H:i')} -
@@ -17,12 +20,15 @@
 					<f:render partial="Answer" arguments="{answer:answer}" />
 				</f:for>
 			</f:if>
-			<div class="in2code-feedback-answer">
-				<f:render partial="Form/Answer" arguments="{_all}" />
-			</div>
+			<f:comment>
+				<div class="in2code-feedback-answer">
+					<f:render partial="Form/Answer" arguments="{_all}" />
+				</div>
+			</f:comment>
+			<hr />
 		</div>
-		<hr />
 	</f:for>
+
 	<f:render partial="Form/Feedback" arguments="{_all}" />
 </div>
 
@@ -31,6 +37,16 @@
 	var overlay = document.querySelector('.in2code-feedback-form');
 	var feedbackButton = document.querySelector('.in2code-feedback-button');
 	var abortButton = document.querySelector('.in2code-feedback-abort-button');
+	var typeButtons = document.querySelectorAll('[data-select-type]');
+	var changeItemDisplayStyle = function(feedback, display) {
+		for (var i in feedback) {
+			var item = feedback[i];
+			if (!item.style) {
+				continue;
+			}
+			item.style.display = display;
+		}
+	};
 
 	feedbackButton.addEventListener('click', function() {
 		overlay.classList.add('active');
@@ -38,5 +54,22 @@
 	abortButton.addEventListener('click', function() {
 		overlay.classList.remove('active');
 	});
+
+	for (var i in typeButtons) {
+		var button = typeButtons[i];
+		if (!button.addEventListener) {
+			continue;
+		}
+		button.addEventListener('click', function(e) {
+			var item = e.target;
+			var typeUid = item.getAttribute('data-select-type');
+			var feedback = document.querySelectorAll('[data-type]');
+			changeItemDisplayStyle(feedback, 'none');
+			var feedbackToShow = document.querySelectorAll('[data-type="' + typeUid + '"]');
+			changeItemDisplayStyle(feedbackToShow, 'block');
+			return false;
+		});
+	}
+
 })();
 </script>

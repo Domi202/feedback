@@ -135,4 +135,28 @@ class FeedbackService implements SingletonInterface
     {
         return $this->feedbackRepository->findByPid([$pageUid]);
     }
+
+    /**
+     * @param \Iterator $feedback
+     * @return array
+     */
+    public function getTypeCount($feedback)
+    {
+        $result = [];
+        foreach ($feedback as $feedbackItem) {
+            /** @var Feedback $feedbackItem */
+            $type = $feedbackItem->getType();
+            if ($type
+                && !isset($result[$type->getUid()])
+            ) {
+                $result[$type->getUid()] = [
+                    'title' => $type->getTitle(),
+                    'count' => 1,
+                ];
+                continue;
+            }
+            $result[$type->getUid()]['count']++;
+        }
+        return $result;
+    }
 }

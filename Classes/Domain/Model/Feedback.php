@@ -110,7 +110,7 @@ class Feedback extends AbstractEntity
      * @param FeedbackType $type
      * @return void
      */
-    public function setType(FeedbackType $type)
+    public function setType(FeedbackType $type = null)
     {
         $this->type = $type;
     }

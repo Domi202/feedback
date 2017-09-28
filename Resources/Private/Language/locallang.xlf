@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="de" datatype="plaintext" original="messages" date="" product-name="feedback">
+		<header/>
+		<body>
+			<trans-unit id="validationError.feedback.type.1221560910">
+				<source>Bitte wählen Sie einen Feedback-Typ aus</source>
+			</trans-unit>
+			<trans-unit id="validationError.feedback.comment.1221560718">
+				<source>Bitte geben Sie einen Kommentar an</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

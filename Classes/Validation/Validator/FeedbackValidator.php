@@ -34,10 +34,18 @@ class FeedbackValidator extends GenericObjectValidator
         }
 
         $this->checkProperty(
+            $object->getType(),
+            [
+                $this->validatorResolver->createValidator(NotEmptyValidator::class),
+            ],
+            'type'
+        );
+
+        $this->checkProperty(
             $object->getUrl(),
             [
                 $this->validatorResolver->createValidator(NotEmptyValidator::class),
-                $this->validatorResolver->createValidator(StringValidator::class)
+                $this->validatorResolver->createValidator(StringValidator::class),
             ],
             'url'
         );
@@ -46,7 +54,7 @@ class FeedbackValidator extends GenericObjectValidator
             $object->getComment(),
             [
                 $this->validatorResolver->createValidator(NotEmptyValidator::class),
-                $this->validatorResolver->createValidator(StringValidator::class)
+                $this->validatorResolver->createValidator(StringValidator::class),
             ],
             'comment'
         );

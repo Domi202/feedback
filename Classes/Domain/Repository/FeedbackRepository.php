@@ -10,7 +10,8 @@ class FeedbackRepository extends Repository
      * @var array
      */
     protected $defaultOrderings = [
-        'crdate' => QueryInterface::ORDER_DESCENDING
+        'type' => QueryInterface::ORDER_ASCENDING,
+        'crdate' => QueryInterface::ORDER_DESCENDING,
     ];
 
     /**

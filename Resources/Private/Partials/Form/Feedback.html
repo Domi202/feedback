@@ -2,25 +2,22 @@
 <f:form action="save" object="{feedback}" objectName="feedback">
 	<fieldset>
 		<legend>Feedback</legend>
-		<f:form.validationResults for="feedback">
-			<f:if condition="{validationResults.flattenedErrors}">
-				<ul>
-					<f:for each="{validationResults.flattenedErrors}" key="propertyPath" as="errors">
-						<f:for each="{errors}" as="error">
-							<li>{error.message} ({propertyPath})</li>
-						</f:for>
-					</f:for>
-				</ul>
-			</f:if>
-		</f:form.validationResults>
 		<f:form.hidden property="data" value="{data}" />
 		<f:form.hidden property="url" value="{url}" />
 		<f:form.hidden property="pid" value="{currentPid}" />
 		<div>
-			<feedback:form.typeSelect property="type" />
+			<f:comment>
+				<feedback:form.typeSelect property="type" />
+			</f:comment>
+			<f:for each="{feedbackTypes}" as="feedbackType">
+				<f:form.radio property="type" value="{feedbackType.uid}" id="type_{feedbackType.uid}" />
+				<label for="type_{feedbackType.uid}">{feedbackType.title}</label>
+			</f:for>
+			<f:render partial="ValidationErrors" arguments="{for:'feedback.type'}" />
 		</div>
 		<div>
 			<f:form.textarea property="comment" data="{'no-rte':'true'}" />
+			<f:render partial="ValidationErrors" arguments="{for:'feedback.comment'}" />
 		</div>
 		<div>
 			<f:form.submit value="Senden" />
