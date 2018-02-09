@@ -146,9 +146,10 @@ class FeedbackService implements SingletonInterface
         foreach ($feedback as $feedbackItem) {
             /** @var Feedback $feedbackItem */
             $type = $feedbackItem->getType();
-            if ($type
-                && !isset($result[$type->getUid()])
-            ) {
+            if (!$type) {
+                continue;
+            }
+            if (!isset($result[$type->getUid()])) {
                 $result[$type->getUid()] = [
                     'title' => $type->getTitle(),
                     'count' => 1,
